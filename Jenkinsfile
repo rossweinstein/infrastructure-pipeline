@@ -10,7 +10,7 @@ node('linux') {
 
     stage ("CreateInstance") {
         sh "aws ec2 run-instances --image-id ami-467ca739 --count 1 --instance-type t2.micro --key-name seis665-classroom-key --security-group-ids sg-c6d452b1 --subnet-id subnet-f6f4b2c9 --region us-east-1"
-        sh "aws ec2 describe-instances --filters "Name=key-name,Values=seis665-classroom-key" | jq .Reservations[].Instances[].InstanceId"
+        sh "aws ec2 describe-instances --filters 'Name=key-name,Values=seis665-classroom-key' | jq .Reservations[].Instances[].InstanceId"
     }
 
     stage ("TerminateInstance") {
