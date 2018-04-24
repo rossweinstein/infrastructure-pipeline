@@ -14,7 +14,7 @@ node('linux') {
 
     stage ("TerminateInstance") {
         def output = sh returnStdout: true, script: 'aws ec2 describe-instances --region us-east-1 --filters "Name=key-name,Values=seis665-classroom-key" | jq .Reservations[].Instances[].InstanceId'
-        sh "aws ec2 wait instance-running --instance-ids $output --region us-east-1"
-        sh "aws ec2 terminate-instances --instance-ids $output --region us-east-1"
+        sh "aws ec2 wait instance-running --region us-east-1 --instance-ids $output"
+        sh "aws ec2 terminate-instances--region us-east-1 --instance-ids $output"
     }
 }
